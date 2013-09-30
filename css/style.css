@@ -1,0 +1,194 @@
+* { margin: 0; padding: 0; }
+
+body {
+    overflow: hidden;
+    background: dimgrey;
+}
+
+body.success {
+    background: green;
+}
+
+a {
+    display: block;
+    background: #c9c9c9;
+    color: #7a8092;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px dimgrey;
+    outline: none;
+}
+
+a:focus { outline: none; }
+
+/* Answer feedback ring. */
+#ring {
+    position: absolute;
+    box-shadow: 0 0 2.0em gainsboro, 0 0 3.0em gainsboro, inset 0 0 2.0em gainsboro;
+    height: 25.0em;
+    width: 25.0em;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    border: 0.4em solid gainsboro;
+    border-radius: 100%;
+    opacity: .5;
+    transition: 2s;
+}
+
+#ring:hover {
+    box-shadow: 0 0 2.0em white,0 0 4.0em white,inset 0 0 2.0em white;
+    border: 0.4 solid white;
+    opacity: 1;
+    transition: 2s;
+}
+
+#ring.success {
+    box-shadow: 0 0 2.0em lime, 0 0 3.0em lime, inset 0 0 2.0em lime;
+    border: 0.4em solid lime;
+}
+
+#ring.success:hover {
+    box-shadow: 0 0 2.0em lime,0 0 4.0em lime,inset 0 0 2.0em lime;
+    border: 0.4 solid lime;
+    opacity: 1;
+    transition: 2s;
+}
+
+#ring.failure {
+    box-shadow: 0 0 2.0em red, 0 0 3.0em red, inset 0 0 2.0em red;
+    border: 0.4em solid red;
+}
+
+#ring.failure:hover {
+    box-shadow: 0 0 2.0em red,0 0 4.0em red,inset 0 0 2.0em red;
+    border: 0.4 solid red;
+    opacity: 1;
+    transition: 2s;
+}
+
+/* Central activation button. */
+#menu-button {
+    z-index: 2;
+    position: absolute;
+    display: block;
+    box-shadow: 0 0 0.1em 0 gainsboro;
+    width: 2.0em;
+    height: 2.0em;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.0em;
+    margin-left: -1.0em;
+    border-radius: 100%;
+    background: #c9c9c9;
+    font: 5.0em Verdana, sans-serif;
+    color: dimgray;
+    line-height: 2.0em;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px dimgray;
+    outline: none;
+    transition: 2.0s;
+}
+
+#menu-button.success {
+    box-shadow: 0 0 0.1em 0 lime;
+    background: lime;
+    color: green;
+    text-shadow: 0 -1px lime;
+}
+
+#menu-button.failure {
+    box-shadow: 0 0 0.1em 0 red;
+    background: red;
+    color: darkred;
+    text-shadow: 0 -1px red;
+}
+
+/* Radial menu. */
+#menu {
+    z-index: 1;
+    position: absolute;
+    width: 12em;
+    height: 12em;
+    margin: -6em;
+
+    top: 50%; left: 50%;
+    font: 1.5em/1.13 Verdana, sans-serif;
+    list-style: none;
+    transition: .5s;
+    transform: scale(.001);
+    opacity: 0;
+}
+
+/* Make the menu appear on click. */
+#menu-button:focus + #menu {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Slices of the circular menu. */
+.item {
+    overflow: hidden;
+    position: absolute;
+    width: 50%; height: 50%;
+    transform-origin: 100% 100%;
+}
+
+/* 
+ * rotate each slice at the right angle = (A/2)° + (k - (n+1)/2)*A°
+ * where A is the angle of 1 slice (30° in this case)
+ * k is the number of the slice (in {1,2,3,4,5} here)
+ * and n is the number of slices (5 in this case)
+ * formula works for odd number of slices (n odd)
+ * for even number of slices (n even) the rotation angle is (k - n/2)*A°
+ * 
+ * after rotating, skew on Y by 90°-A°; here A° = the angle for 1 slice = 30° 
+ */
+.item:nth-child(1) {
+  transform: rotate(25.71deg) skewY(38.57deg);
+}
+.item:nth-child(2) {
+  transform: rotate(77.14deg) skewY(38.57deg);
+}
+.item:nth-child(3) {
+  transform: rotate(128.6deg) skewY(38.57deg);
+}
+.item:nth-child(4) {
+  transform: rotate(180deg) skewY(38.57deg);
+}
+.item:nth-child(5) {
+  transform: rotate(-128.6deg) skewY(38.57deg);
+}
+.item:nth-child(6) {
+  transform: rotate(-77.14deg) skewY(38.57deg);
+}
+.item:nth-child(7) {
+  transform: rotate(-25.71deg) skewY(38.57deg);
+}
+
+/* Clickable segments of the menu slices. */
+.item a {
+    z-index: 3;
+    opacity: .56;
+    width: 200%; height: 200%;
+    border-radius: 50%;
+    box-shadow: 0 0 3px dimgrey, inset 0 0 4px white;
+    /* "unskew" & rotate by -A°/2 */
+    transform: skewY(-38.57deg) rotate(-27.71deg);
+    background: /* lateral separators */
+            linear-gradient(75deg, 
+        transparent 50%, grey 50%, transparent 54%) no-repeat 0% 0,
+            linear-gradient(-75deg, 
+        transparent 50%, grey 50%, transparent 54%) no-repeat 0% 0,
+        /* make sure inner part is transparent */
+        radial-gradient(rgba(127,127,127,0) 49%, 
+                    rgba(255,255,255,.7) 51%, #c9c9c9 52%);
+    background-size: 15% 15%, 15% 15%, cover;
+    line-height: 1.5em;
+}
+
+/* Hover feedback for selected slice. */
+.item a:hover, .item a:focus { opacity: 1; }
