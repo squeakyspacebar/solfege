@@ -40,7 +40,7 @@ a:focus { outline: none; }
 
 #ring:hover {
     box-shadow: 0 0 2.0em white,0 0 4.0em white,inset 0 0 2.0em white;
-    border: 0.4 solid white;
+    border: 0.4em solid white;
     opacity: 1;
     transition: 2s;
 }
@@ -52,7 +52,7 @@ a:focus { outline: none; }
 
 #ring.success:hover {
     box-shadow: 0 0 2.0em lime,0 0 4.0em lime,inset 0 0 2.0em lime;
-    border: 0.4 solid lime;
+    border: 0.4em solid lime;
     opacity: 1;
     transition: 2s;
 }
@@ -64,7 +64,7 @@ a:focus { outline: none; }
 
 #ring.failure:hover {
     box-shadow: 0 0 2.0em red,0 0 4.0em red,inset 0 0 2.0em red;
-    border: 0.4 solid red;
+    border: 0.4em solid red;
     opacity: 1;
     transition: 2s;
 }
