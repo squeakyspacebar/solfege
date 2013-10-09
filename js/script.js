@@ -81,11 +81,11 @@ $(document).ready(function() {
   init();
   guess();
   $("#about-menu-handle").click(function() {
-    $("#about-menu").toggleClass("open");
+    $("#about-menu-container").toggleClass("open");
     $("#about-menu-handle").toggleClass("push-right");
   });
   $("#configuration-menu-handle").click(function() {
-    $("#configuration-menu").toggleClass("open");
+    $("#configuration-menu-container").toggleClass("open");
     $("#configuration-menu-handle").toggleClass("push-left");
   });
 });
