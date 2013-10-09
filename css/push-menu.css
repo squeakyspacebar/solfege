@@ -1,0 +1,55 @@
+.push-menu-handle {
+  display: block;
+  position: absolute;
+  width: 1.0em;
+  height: 100%;
+  background: dimgray;
+}
+
+.push-menu-handle.push-left {
+  right: 30%;
+}
+
+.push-menu-handle.push-right {
+  left: 30%;
+}
+
+.push-menu-handle-left {
+  left: 0;
+}
+
+.push-menu-handle-right {
+  right: 0;
+}
+
+.push-menu {
+  position: fixed;
+  top: 0;
+  width: 30%;
+  height: 100%;
+  z-index: 9001;
+  background: gainsboro;
+}
+
+.push-menu-vertical {
+  top: 0;
+  width: 30%;
+  height: 100%;
+  z-index: 9001;
+}
+
+.push-menu-left {
+  left: -30%;
+}
+
+.push-menu-right {
+  right: -30%;
+}
+
+.push-menu-left.open {
+  left: 0;
+}
+
+.push-menu-right.open {
+  right: 0;
+}
