@@ -9,16 +9,6 @@ body.success {
     background: green;
 }
 
-a {
-    display: block;
-    background: #c9c9c9;
-    color: #7a8092;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 -1px dimgray;
-    outline: none;
-}
-
 a:focus { outline: none; }
 
 /* Answer feedback ring. */
@@ -186,6 +176,7 @@ a:focus { outline: none; }
 
 /* Clickable segments of the menu slices. */
 .item a {
+    display: block;
     z-index: 3;
     opacity: .56;
     width: 200%; height: 200%;
@@ -204,6 +195,11 @@ a:focus { outline: none; }
                     rgba(255,255,255,.7) 51%, #c9c9c9 52%);
     background-size: 15% 15%, 15% 15%, cover;
     line-height: 1.5em;
+    color: #7a8092;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px dimgray;
+    outline: none;
 }
 
 /* Hover feedback for selected slice. */

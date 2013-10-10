@@ -1,9 +1,12 @@
 .push-menu-handle {
   display: block;
   position: absolute;
-  width: 1.0em;
+  width: 2.0em;
   height: 100%;
   background: dimgray;
+  color: white;
+  text-decoration: none;
+  text-align: center;
 }
 
 .push-menu-handle.push-left {
