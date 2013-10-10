@@ -20,13 +20,13 @@
   font: bold 1.0em Verdana, sans-serif;
   text-decoration: none;
   text-shadow: 0px 1px 0px rgba(0, 0, 0, .35);
+  opacity: .75;
 }
 
 .accordion li > .sub-content {
   height: 0;
   padding: 0;
   overflow: hidden;
-
   -webkit-transition: all 0.5s ease-in-out;
   transition: all 0.5s ease-in-out;
 }
@@ -38,11 +38,12 @@
 .sub-content {
   background: dimgray;
   font: 1.0em Verdana, sans-serif;
-  opacity: .56;
+  opacity: .5;
 }
 
 .sub-content .content {
   padding: 1.5em;
+  color: #fdfdfd;
 }
 
 .sub-content ul {
