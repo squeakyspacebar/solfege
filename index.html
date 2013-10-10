@@ -8,12 +8,80 @@
   <meta name="author" content="Andy Lo">
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/push-menu.css" />
+  <link rel="stylesheet" href="css/accordion-menu.css" />
 </head>
 <body>
-  <nav id="about-menu-container" class="push-menu push-menu-vertical push-menu-left"></nav>
-  <nav id="configuration-menu-container" class="push-menu push-menu-vertical push-menu-right"></nav>
-  <a id="about-menu-handle" class="push-menu-handle push-menu-handle-left" href="#"></a>
-  <a id="configuration-menu-handle" class="push-menu-handle push-menu-handle-right" href="#"></a>
+  <!-- Push Menu Handles -->
+  <a id="about-menu-handle" class="push-menu-handle push-menu-handle-left" href="#">&#8250;</a>
+  <a id="configuration-menu-handle" class="push-menu-handle push-menu-handle-right" href="#">&#8249;</a>
+  <!-- Push Menu Content -->
+  <nav id="about-menu-container" class="push-menu push-menu-vertical push-menu-left">
+    <ul id="about-menu" class="accordion">
+      <li id="about-menu-1">
+        <a href="#about-menu-1">About</a>
+        <div class="sub-content">
+          <div class="content">
+            <p>This is a small personal design project for an ear training tool using solfège.
+            It was conceived as an exercise in interface design as well as an introduction to newer
+            HTML5/CSS developments.</p><br />
+            <p>I attempted to accomplish this project with as little JavaScript as I could get away
+            with.  As a result, most of the effects you see are heavily implemented via CSS.  My use
+            of jQuery is largely limited to handling the tone generation and toggling classes.</p><br />
+            <p>Since I am not primarily a front-end developer (if you couldn't tell already), I
+            thought it would be a good opportunity to round out my skillset.</p><br />
+            <p>Right now, it is still a work in progress.  I am currently planning on:</p><br />
+            <ul>
+              <li>Fixed jQuery event handling for clicking on the radial menu instead of hovering.</li>
+              <li>A game loop to continuously generate new tones ad infinitum without refreshing.</li>
+              <li>Configurable solfege pronunciations.</li>
+              <li>Configurable octaves and keys.</li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li id="about-menu-2">
+        <a href="#about-menu-2">How to Use</a>
+        <div class="sub-content">
+          <div class="content">
+            <p>Simply press the icon in the center of the screen to play a tone and activate the
+            radial menu.  Hover over the name of the tone you think it is, and the ring will
+            turn green if you are correct, red if not.<p><br />
+            <p><em>NOTE:</em> Currently, you will need to refresh the page in order to generate a new tone (I'm working on it).</p>
+          </div>
+        </div>
+      </li>
+      <li id="about-menu-3">
+        <a href="#about-menu-3">Credit</a>
+        <div class="sub-content">
+          <div class="content">
+            <p>This project utilizes techniques from inspired by several different sources.
+              In the interest of due credit, here is a list:</p><br />
+            <ul>
+              <li>
+                CSS Radial Menu: Ana Tudor
+                <a href="http://dabblet.com/gist/3979221/cb69c5e8ccf0745fff2c94b47b27b108931f1a15">http://dabblet.com/gist/3979221/cb69c5e8ccf0745fff2c94b47b27b108931f1a15</a>
+              </li>
+              <li>
+                Sliding Menus: Tympanus (Blueprints)
+                <a href="http://tympanus.net/Blueprints/SlidePushMenus/">http://tympanus.net/Blueprints/SlidePushMenus/</a>
+              </li>
+              <li>
+                CSS Accordion Menus: Valeriu Tumbuc at Designmodo
+                <a href="http://designmodo.com/css3-accordion-menu/">http://designmodo.com/css3-accordion-menu/</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </nav>
+  <nav id="configuration-menu-container" class="push-menu push-menu-vertical push-menu-right">
+    <ul id="configuration-menu" class="accordion">
+      <li id="configuration-menu-1"><a href="#">Octaves</a></li>
+      <li id="configuration-menu-2"><a href="#">Keys</a></li>
+    </ul>
+  </nav>
+  <!-- Training Interface -->
   <audio id="voice" type="audio/ogg">Your browser does not support the audio element.</audio>
   <div id="ring">
     <a id="menu-button" tabindex="1" href="#">&#9834;</a>
