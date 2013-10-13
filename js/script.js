@@ -9,8 +9,10 @@ var toneMap = {
   "ti" : "b4.ogg",
 };
 
-// Initialize audio controls.
+var finishedEvent = new Event("finished");
+
 function init() {
+  // Initialize audio controls.
   var audio = document.getElementById("voice");
 
   $("#menu-button").click(function() {
@@ -21,6 +23,26 @@ function init() {
       audio.pause();
       audio.currentTime = 0;
   });
+
+  // Define menu handle behaviors.
+  $("#about-menu-handle").on("click", function() {
+    $("#about-menu-container").toggleClass("open");
+    $("#about-menu-handle").toggleClass("push-right");
+  });
+
+  $("#configuration-menu-handle").on("click", function() {
+    $("#configuration-menu-container").toggleClass("open");
+    $("#configuration-menu-handle").toggleClass("push-left");
+  });
+
+  // Generate a new scenario if current one is indicated as finished.
+  document.addEventListener("finished", function(e) {
+    clear();
+    generateScenario();
+  }, false);
+
+  // Initialize first scenario.
+  generateScenario();
 }
 
 // Generates the tone.
@@ -38,54 +60,51 @@ function setTone(tone) {
   // Determine audio file to load.
   var toneFile = toneMap[tone];
 
-  // Set file as audio source.
+  // Set the proper file as the audio source.
   $("#voice").attr("src", "audio/" + toneFile);
 }
 
 // Remove answer feedback.
-function remove() {
+function clear() {
   $("#ring").removeClass("success failure");
   $("#menu-button").removeClass("success failure");
 }
 
 // Generate answer feedback for correct guesses.
-function success() {
-  remove();
+function success(e) {
+  e.preventDefault;
+  clear();
   $("#ring").addClass("success");
   $("#menu-button").addClass("success");
 }
 
 // Generate answer feedback for incorrect guesses.
-function failure() {
-  remove();
+function failure(e) {
+  e.preventDefault;
+  clear();
   $("#ring").addClass("failure");
   $("#menu-button").addClass("failure");
 }
 
 // Generates a new scenario.
-function guess() {
+function generateScenario() {
   var tone = getTone();
   setTone(tone);
 
-  $("#menu-button").click(function() {
-    $(".item a#" + tone).hover(success, remove);  
-    $(".item a:not(#" + tone + ")").hover(failure, remove);
+  $("#menu-button").on("click", function() {
+    $(".item")
+      .on("click", "a#" + tone, success)
+      .on("focusout", clear);
+    $(".item")
+      .on("click", "a:not(#" + tone + ")", failure)
+      .on("focusout", clear);
   });
 
   $("#menu-button").blur(function() {
-    $(".item a").unbind("click");
+    $(".item a").off("click");
   });
 }
 
 $(document).ready(function() {
   init();
-  guess();
-  $("#about-menu-handle").click(function() {
-    $("#about-menu-container").toggleClass("open");
-    $("#about-menu-handle").toggleClass("push-right");
-  });
-  $("#configuration-menu-handle").click(function() {
-    $("#configuration-menu-container").toggleClass("open");
-    $("#configuration-menu-handle").toggleClass("push-left");
-  });
 });
