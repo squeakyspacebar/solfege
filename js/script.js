@@ -9,19 +9,18 @@ var toneMap = {
   "ti" : "b4.ogg",
 };
 
+var audio = document.getElementById("voice");
+
 var finishedEvent = new Event("finished");
 
 function init() {
   // Initialize audio controls.
-  var audio = document.getElementById("voice");
+  enableAudio();
 
-  $("#menu-button").click(function() {
-      audio.play();
-  });
-
-  $("#menu-button").blur(function() {
-      audio.pause();
-      audio.currentTime = 0;
+  // Stops audio if the answer wheel is closed.
+  $("#menu-button").on("focusout.stopaudio", function() {
+    audio.pause();
+    audio.currentTime = 0;
   });
 
   // Define menu handle behaviors.
@@ -64,26 +63,43 @@ function setTone(tone) {
   $("#voice").attr("src", "audio/" + toneFile);
 }
 
+function enableAudio() {
+  $("#menu-button").off("click.audio");
+  $("#menu-button").on("click.audio", function() {
+    audio.play();
+  });
+}
+
 // Remove answer feedback.
 function clear() {
+  $("#menu-button").html("&#9834;");
   $("#ring").removeClass("success failure");
   $("#menu-button").removeClass("success failure");
 }
 
 // Generate answer feedback for correct guesses.
-function success(e) {
-  e.preventDefault;
+function success() {
   clear();
+  $("#menu-button").html("&#x2713;");
   $("#ring").addClass("success");
   $("#menu-button").addClass("success");
+  $("#menu-button").trigger("answered");
 }
 
 // Generate answer feedback for incorrect guesses.
-function failure(e) {
-  e.preventDefault;
+function failure() {
   clear();
+  $("#menu-button").html("&#x274c;");
   $("#ring").addClass("failure");
   $("#menu-button").addClass("failure");
+  $("#menu-button").trigger("answered");
+}
+
+function focusout() {
+  clear();
+  $(document).one("click.audio", function() {
+    enableAudio();
+  });
 }
 
 // Generates a new scenario.
@@ -91,17 +107,23 @@ function generateScenario() {
   var tone = getTone();
   setTone(tone);
 
-  $("#menu-button").on("click", function() {
+  $("#menu-button").on("click.answer", function() {
     $(".item")
-      .on("click", "a#" + tone, success)
-      .on("focusout", clear);
-    $(".item")
-      .on("click", "a:not(#" + tone + ")", failure)
-      .on("focusout", clear);
+      .on("click.answer.right", "a#" + tone, success)
+      .on("click.answer.wrong", "a:not(#" + tone + ")", failure)
+      .on("focusout.answer", focusout);
   });
 
-  $("#menu-button").blur(function() {
-    $(".item a").off("click");
+  // Prevents audio from replaying when clicking on the answer wheel button
+  // to reset the scenario.
+  $("#menu-button").on("focusout.answer", function() {
+    $("#menu-button").off("answered");
+    $("#menu-button").on("answered", function() {
+      $("#menu-button").off("click.audio");
+      $("#menu-button").one("click.audio", function() {
+        enableAudio();
+      });
+    });
   });
 }
 
