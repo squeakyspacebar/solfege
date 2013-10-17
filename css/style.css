@@ -1,138 +1,145 @@
-* { margin: 0; padding: 0; }
+* {
+  margin: 0;
+  padding: 0;
+}
 
 body {
-    overflow: hidden;
-    background: gray;
+  overflow: hidden;
+  background: gray;
 }
 
 body.success {
-    background: green;
+  background: green;
 }
 
-a:focus { outline: none; }
+a:focus {
+  outline: none;
+}
 
 /* Answer feedback ring. */
 #ring {
-    position: absolute;
-    box-shadow: 0 0 2.0em gainsboro, 0 0 3.0em gainsboro, inset 0 0 2.0em gainsboro;
-    height: 25.0em;
-    width: 25.0em;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    border: 0.4em solid gainsboro;
-    border-radius: 100%;
-    opacity: .5;
-    -webkit-transition: 2s;
-    transition: 2s;
+  position: absolute;
+  box-shadow: 0 0 2em gainsboro, 0 0 3em gainsboro, inset 0 0 2em gainsboro;
+  height: 25em;
+  width: 25em;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  border: .4em solid gainsboro;
+  border-radius: 100%;
+  opacity: .5;
+  -webkit-transition: 1s;
+  transition: 1s;
 }
 
 #ring:hover {
-    box-shadow: 0 0 2.0em white,0 0 4.0em white,inset 0 0 2.0em white;
-    border: 0.4em solid white;
-    opacity: 1;
-    -webkit-transition: 2s;
-    transition: 2s;
+  box-shadow: 0 0 2em white, 0 0 4em white, inset 0 0 2em white;
+  border: .4em solid white;
+  opacity: 1;
+  -webkit-transition: 1s;
+  transition: 1s;
 }
 
 #ring.success {
-    box-shadow: 0 0 2.0em lime, 0 0 3.0em lime, inset 0 0 2.0em lime;
-    border: 0.4em solid lime;
+  box-shadow: 0 0 2.0em lime, 0 0 3.0em lime, inset 0 0 2.0em lime;
+  border: 0.4em solid lime;
 }
 
 #ring.success:hover {
-    box-shadow: 0 0 2.0em lime,0 0 4.0em lime,inset 0 0 2.0em lime;
-    border: 0.4em solid lime;
-    opacity: 1;
-    -webkit-transition: 2s;
-    transition: 2s;
+  box-shadow: 0 0 2em lime, 0 0 4em lime, inset 0 0 2em lime;
+  border: .4em solid lime;
+  opacity: 1;
+  -webkit-transition: 1s;
+  transition: 1s;
 }
 
 #ring.failure {
-    box-shadow: 0 0 2.0em red, 0 0 3.0em red, inset 0 0 2.0em red;
-    border: 0.4em solid red;
+  box-shadow: 0 0 2em red, 0 0 3em red, inset 0 0 2em red;
+  border: 0.4em solid red;
 }
 
 #ring.failure:hover {
-    box-shadow: 0 0 2.0em red,0 0 4.0em red,inset 0 0 2.0em red;
-    border: 0.4em solid red;
-    opacity: 1;
-    transition: 2s;
+  box-shadow: 0 0 2em red, 0 0 4em red, inset 0 0 2em red;
+  border: .4em solid red;
+  opacity: 1;
+  -webkit-transition: 1s;
+  transition: 1s;
 }
 
 /* Central activation button. */
 #menu-button {
-    z-index: 2;
-    position: absolute;
-    display: block;
-    box-shadow: 0 0 0.1em 0 gainsboro;
-    width: 2.0em;
-    height: 2.0em;
-    top: 50%;
-    left: 50%;
-    margin-top: -1.0em;
-    margin-left: -1.0em;
-    border-radius: 100%;
-    background: #c9c9c9;
-    font: 5.0em Verdana, sans-serif;
-    color: dimgray;
-    line-height: 2.0em;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 -1px dimgray;
-    outline: none;
-    -webkit-transition: 2s;
-    transition: 2.0s;
+  z-index: 2;
+  position: absolute;
+  display: block;
+  box-shadow: 0 0 .1em 0 gainsboro;
+  width: 2em;
+  height: 2em;
+  top: 50%;
+  left: 50%;
+  margin-top: -1em;
+  margin-left: -1em;
+  border-radius: 100%;
+  background: #c9c9c9;
+  font: 5em Verdana, sans-serif;
+  color: dimgray;
+  line-height: 2em;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px dimgray;
+  outline: none;
+  -webkit-transition: 1s;
+  transition: 1s;
 }
 
 #menu-button.success {
-    box-shadow: 0 0 0.1em 0 lime;
-    background: lime;
-    color: green;
-    text-shadow: 0 -1px lime;
+  box-shadow: 0 0 .1em 0 lime;
+  background: lime;
+  color: green;
+  text-shadow: 0 -1px lime;
 }
 
 #menu-button.failure {
-    box-shadow: 0 0 0.1em 0 red;
-    background: red;
-    color: darkred;
-    text-shadow: 0 -1px red;
+  box-shadow: 0 0 0.1em 0 red;
+  background: red;
+  color: darkred;
+  text-shadow: 0 -1px red;
 }
 
 /* Radial menu. */
 #menu {
-    z-index: 1;
-    position: absolute;
-    width: 12em;
-    height: 12em;
-    margin: -6em;
-
-    top: 50%; left: 50%;
-    font: 1.5em/1.13 Verdana, sans-serif;
-    list-style: none;
-    -webkit-transition: .5s;
-    transition: .5s;
-    -webkit-transform: scale(.001);
-    transform: scale(.001);
-    opacity: 0;
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12em;
+  height: 12em;
+  margin: -6em;
+  font: 1.5em/1.13 Verdana, sans-serif;
+  list-style: none;
+  -webkit-transition: 1s;
+  transition: 1s;
+  -webkit-transform: scale(.001);
+  transform: scale(.001);
+  opacity: 0;
 }
 
 /* Make the menu appear on click. */
 #menu-button:focus + #menu {
-    -webkit-transform: scale(1);
-    transform: scale(1);
-    opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
 }
 
 /* Slices of the circular menu. */
 .item {
-    overflow: hidden;
-    position: absolute;
-    width: 50%; height: 50%;
-    -webkit-transform-origin: 100% 100%;
-    transform-origin: 100% 100%;
+  overflow: hidden;
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  -webkit-transform-origin: 100% 100%;
+  transform-origin: 100% 100%;
 }
 
 /* 
@@ -176,31 +183,30 @@ a:focus { outline: none; }
 
 /* Clickable segments of the menu slices. */
 .item a {
-    display: block;
-    z-index: 3;
-    opacity: .56;
-    width: 200%; height: 200%;
-    border-radius: 50%;
-    box-shadow: 0 0 3px dimgray, inset 0 0 4px white;
-    /* "unskew" & rotate by -A°/2 */
-    -webkit-transform: skewY(-38.57deg) rotate(-27.71deg);
-    transform: skewY(-38.57deg) rotate(-27.71deg);
-    background: /* lateral separators */
-            linear-gradient(75deg, 
-        transparent 50%, gray 50%, transparent 54%) no-repeat 0% 0,
-            linear-gradient(-75deg, 
-        transparent 50%, gray 50%, transparent 54%) no-repeat 0% 0,
-        /* make sure inner part is transparent */
-        radial-gradient(rgba(127,127,127,0) 49%, 
-                    rgba(255,255,255,.7) 51%, #c9c9c9 52%);
-    background-size: 15% 15%, 15% 15%, cover;
-    line-height: 1.5em;
-    color: #7a8092;
-    text-align: center;
-    text-decoration: none;
-    text-shadow: 0 -1px dimgray;
-    outline: none;
+  display: block;
+  z-index: 3;
+  opacity: .56;
+  width: 200%; height: 200%;
+  border-radius: 50%;
+  box-shadow: 0 0 3px dimgray, inset 0 0 4px white;
+  /* "unskew" & rotate by -A°/2 */
+  -webkit-transform: skewY(-38.57deg) rotate(-27.71deg);
+  transform: skewY(-38.57deg) rotate(-27.71deg);
+  background: /* lateral separators */
+    linear-gradient(75deg, transparent 50%, gray 50%, transparent 54%) no-repeat 0% 0,
+    linear-gradient(-75deg, transparent 50%, gray 50%, transparent 54%) no-repeat 0% 0,
+    /* make sure inner part is transparent */
+    radial-gradient(rgba(127,127,127,0) 49%, rgba(255,255,255,.7) 51%, #c9c9c9 52%);
+  background-size: 15% 15%, 15% 15%, cover;
+  line-height: 1.5em;
+  color: #7a8092;
+  text-align: center;
+  text-decoration: none;
+  text-shadow: 0 -1px dimgray;
+  outline: none;
 }
 
 /* Hover feedback for selected slice. */
-.item a:hover, .item a:focus { opacity: 1; }
+.item a:hover, .item a:focus {
+  opacity: 1;
+}
