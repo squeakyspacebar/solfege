@@ -26,12 +26,12 @@ function init() {
   // Define menu handle behaviors.
   $("#about-menu-handle").on("click", function() {
     $("#about-menu-container").toggleClass("open");
-    $("#about-menu-handle").toggleClass("push-right");
+    $("#about-menu-handle").toggleClass("slide-right");
   });
 
   $("#configuration-menu-handle").on("click", function() {
     $("#configuration-menu-container").toggleClass("open");
-    $("#configuration-menu-handle").toggleClass("push-left");
+    $("#configuration-menu-handle").toggleClass("slide-left");
   });
 
   // Generate a new scenario if current one is indicated as finished.

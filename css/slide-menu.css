@@ -1,4 +1,4 @@
-.push-menu-handle {
+.slide-menu-handle {
   display: block;
   position: absolute;
   width: 2.0em;
@@ -9,23 +9,23 @@
   text-align: center;
 }
 
-.push-menu-handle.push-left {
+.slide-menu-handle.slide-left {
   right: 30%;
 }
 
-.push-menu-handle.push-right {
+.slide-menu-handle.slide-right {
   left: 30%;
 }
 
-.push-menu-handle-left {
+.slide-menu-handle-left {
   left: 0;
 }
 
-.push-menu-handle-right {
+.slide-menu-handle-right {
   right: 0;
 }
 
-.push-menu {
+.slide-menu {
   position: fixed;
   top: 0;
   width: 30%;
@@ -34,25 +34,25 @@
   background: gainsboro;
 }
 
-.push-menu-vertical {
+.slide-menu-vertical {
   top: 0;
   width: 30%;
   height: 100%;
   z-index: 9001;
 }
 
-.push-menu-left {
+.slide-menu-left {
   left: -30%;
 }
 
-.push-menu-right {
+.slide-menu-right {
   right: -30%;
 }
 
-.push-menu-left.open {
+.slide-menu-left.open {
   left: 0;
 }
 
-.push-menu-right.open {
+.slide-menu-right.open {
   right: 0;
 }
