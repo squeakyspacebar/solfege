@@ -10,17 +10,6 @@ var toneMap = {
 };
 
 var audio = document.getElementById("voice");
-var finishedEvent = new Event("finished");
-
-$("*").on("focus", function() {
-  console.log("Focus: ");
-  console.log($(this));
-});
-
-$("*").on("focusout", function() {
-  console.log("Focusout: ");
-  console.log($(this));
-});
 
 function init() {
   // Initialize audio controls.
@@ -42,12 +31,6 @@ function init() {
     $("#configuration-menu-container").toggleClass("open");
     $("#configuration-menu-handle").toggleClass("slide-left");
   });
-
-  // Generate a new scenario if current one is indicated as finished.
-  document.addEventListener("finished", function(e) {
-    clear();
-    generateScenario();
-  }, false);
 
   // Initialize first scenario.
   generateScenario();
@@ -110,6 +93,8 @@ function success() {
   $("#menu-button").html("&#10003;");
   $("#ring").addClass("success");
   $("#menu-button").addClass("success");
+  deactivateMenu();
+  generateScenario();
 }
 
 // Generate answer feedback for incorrect guesses.
@@ -149,7 +134,7 @@ function activateMenu(tone) {
 }
 
 function deactivateMenu() {
-  $("#menu-button").off("focus.activate");
+  $("#menu-button").off();
 }
 
 // Generates a new scenario.
