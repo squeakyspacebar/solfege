@@ -10,8 +10,17 @@ var toneMap = {
 };
 
 var audio = document.getElementById("voice");
-
 var finishedEvent = new Event("finished");
+
+$("*").on("focus", function() {
+  console.log("Focus: ");
+  console.log($(this));
+});
+
+$("*").on("focusout", function() {
+  console.log("Focusout: ");
+  console.log($(this));
+});
 
 function init() {
   // Initialize audio controls.
@@ -19,8 +28,8 @@ function init() {
 
   // Stops audio if the answer wheel is closed.
   $("#menu-button").on("focusout.stopaudio", function() {
-    audio.pause();
-    audio.currentTime = 0;
+    stopAudio();
+    enableAudio();
   });
 
   // Define menu handle behaviors.
@@ -64,67 +73,98 @@ function setTone(tone) {
 }
 
 function enableAudio() {
-  $("#menu-button").off("click.audio");
-  $("#menu-button").on("click.audio", function() {
-    audio.play();
-  });
+  var deferredChain = $.Deferred(),
+    off = deferredChain.done(function() {
+      $("#menu-button").off("click.audio");
+    }),
+    on = off.done(function() {
+      $("#menu-button").on("click.audio", function() {
+        stopAudio();
+        audio.play();
+      });
+    });
+  deferredChain.resolve();
+}
+
+function stopAudio() {
+  var deferredChain = $.Deferred(),
+    pause = deferredChain.done(function() {
+      audio.pause();
+    }),
+    reset = pause.done(function() {
+      // For Chrome compatibility.
+      // Setting the currentTime property doesn't work.
+      audio.src = audio.src;
+    });
+  deferredChain.resolve();
 }
 
 // Remove answer feedback.
 function clear() {
-  $("#menu-button").html("&#9834;");
   $("#ring").removeClass("success failure");
   $("#menu-button").removeClass("success failure");
 }
 
 // Generate answer feedback for correct guesses.
 function success() {
-  clear();
-  $("#menu-button").html("&#x2713;");
+  $("#menu-button").html("&#10003;");
   $("#ring").addClass("success");
   $("#menu-button").addClass("success");
-  $("#menu-button").trigger("answered");
 }
 
 // Generate answer feedback for incorrect guesses.
 function failure() {
-  clear();
-  $("#menu-button").html("&#x274c;");
+  $("#menu-button").html("&#10060;");
   $("#ring").addClass("failure");
   $("#menu-button").addClass("failure");
-  $("#menu-button").trigger("answered");
 }
 
-function focusout() {
-  clear();
-  $(document).one("click.audio", function() {
-    enableAudio();
+function activateMenu(tone) {
+  enableAudio();
+  $("#menu-button").on("click", function(e) {
+    e.preventDefault();
+    var deferredChain = $.Deferred(),
+      reset = deferredChain.done(function() {
+        console.log("RESET MENU!");
+        clear();
+        $("#menu-button").html("&#9834;");
+      }),
+      activate = reset.done(function() {
+        console.log("OPEN MENU!");
+        $("#menu-button").focus();
+        $("#menu-button").trigger("activate");
+      });
+    deferredChain.resolve();
   });
+  $("#menu-button").on("activate", function() {
+    $(".item").off();
+    $(".item")
+      .one("click", "a", function(e) {
+        e.preventDefault();
+        console.log("ANSWER!");
+      })
+      .one("click.answer.right", "a#" + tone, success)
+      .one("click.answer.wrong", "a:not(#" + tone + ")", failure);
+  });
+}
+
+function deactivateMenu() {
+  $("#menu-button").off("focus.activate");
 }
 
 // Generates a new scenario.
 function generateScenario() {
-  var tone = getTone();
-  setTone(tone);
-
-  $("#menu-button").on("click.answer", function() {
-    $(".item")
-      .on("click.answer.right", "a#" + tone, success)
-      .on("click.answer.wrong", "a:not(#" + tone + ")", failure)
-      .on("focusout.answer", focusout);
-  });
-
-  // Prevents audio from replaying when clicking on the answer wheel button
-  // to reset the scenario.
-  $("#menu-button").on("focusout.answer", function() {
-    $("#menu-button").off("answered");
-    $("#menu-button").on("answered", function() {
-      $("#menu-button").off("click.audio");
-      $("#menu-button").one("click.audio", function() {
-        enableAudio();
-      });
+  var deferredChain = $.Deferred(),
+    get = deferredChain.then(function() {
+      return getTone();
+    }),
+    set = get.done(function(tone) {
+      setTone(tone);
+    }),
+    finished = set.done(function(tone) {
+      activateMenu(tone);
     });
-  });
+  deferredChain.resolve();
 }
 
 $(document).ready(function() {
