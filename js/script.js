@@ -22,12 +22,14 @@ function init() {
   });
 
   // Define menu handle behaviors.
-  $("#about-menu-handle").on("click", function() {
+  $("#about-menu-handle").on("click", function(e) {
+    e.preventDefault();
     $("#about-menu-container").toggleClass("open");
     $("#about-menu-handle").toggleClass("slide-right");
   });
 
-  $("#configuration-menu-handle").on("click", function() {
+  $("#configuration-menu-handle").on("click", function(e) {
+    e.preventDefault();
     $("#configuration-menu-container").toggleClass("open");
     $("#configuration-menu-handle").toggleClass("slide-left");
   });
