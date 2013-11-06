@@ -11,12 +11,12 @@
 .slide-menu-handle-left {
   left: 0; }
   .slide-menu-handle-left.open {
-    right: 30%; }
+    left: 30%; }
 
 .slide-menu-handle-right {
   right: 0; }
   .slide-menu-handle-right.open {
-    left: 30%; }
+    right: 30%; }
 
 .slide-menu {
   position: fixed;

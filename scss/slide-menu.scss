@@ -15,7 +15,7 @@ $menu-width: 30%;
   left: 0;
 
   &.open {
-    right: $menu-width;
+    left: $menu-width;
   }
 }
 
@@ -23,7 +23,7 @@ $menu-width: 30%;
   right: 0;
 
   &.open {
-    left: $menu-width;
+    right: $menu-width;
   }
 }
 
