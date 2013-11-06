@@ -9,6 +9,53 @@ var toneMap = {
   "ti" : "b4.ogg",
 };
 
+// All the notes with accents must be given as flats.  This is because they are
+// used to find the associated audio filenames where all accents are flat.
+var keys = {
+  "major" : {
+    "c"  : ["c", "d", "e", "f", "g", "a", "b"],
+    "g"  : ["g", "a", "b", "c", "d", "e", "gb"],
+    "d"  : ["d", "e", "gb", "g", "a", "b", "db"],
+    "a"  : ["a", "b", "db", "d", "e", "gb", "ab"],
+    "e"  : ["e", "gb", "ab", "a", "b", "db", "eb"],
+    "b"  : ["b", "db", "eb", "e", "gb", "ab", "bb"],
+    "f#" : ["gb", "ab", "bb", "b", "db", "eb", "f"],
+    "db" : ["db", "eb", "f", "gb", "ab", "bb", "c"],
+    "ab" : ["ab", "bb", "c", "db", "eb", "f", "g"],
+    "eb" : ["eb", "f", "g", "ab", "bb", "c", "g"],
+    "bb" : ["bb", "c", "d", "eb", "f", "g", "a"],
+    "f"  : ["f", "g", "a", "bb", "c", "d", "e"],
+  },
+  "minor" : {
+    "a"  : ["a", "b", "c", "d", "e", "f", "g"],
+    "e"  : ["e", "gb", "g", "a", "b", "c", "d"],
+    "b"  : ["b", "db", "d", "e", "gb", "g", "a"],
+    "f#" : ["gb", "ab", "a", "b", "db", "d", "e"],
+    "c#" : ["db", "eb", "e", "gb", "ab", "a", "b"],
+    "g#" : ["ab", "bb", "b", "db", "eb", "e", "gb"],
+    "d#" : ["eb", "f", "gb", "ab", "bb", "b", "db"],
+    "bb" : ["bb", "c", "db", "eb", "f", "g", "ab"],
+    "f"  : ["f", "g", "ab", "bb", "c", "db", "eb"],
+    "c"  : ["c", "d", "eb", "f", "g", "ab", "bb"],
+    "g"  : ["g", "a", "bb", "c", "d", "eb", "f"],
+    "d"  : ["d", "e", "f", "g", "a", "bb", "c"],
+  },
+};
+
+var configuration = {
+  "activeKey" : keys.major.c,
+  "activeOctaves" : {
+    1 : true,
+    2 : true,
+    3 : true,
+    4 : true,
+    5 : true,
+    6 : true,
+    7 : true,
+    8 : true,
+  }
+}
+
 var audio = document.getElementById("voice");
 
 function init() {
@@ -25,13 +72,13 @@ function init() {
   $("#about-menu-handle").on("click", function(e) {
     e.preventDefault();
     $("#about-menu-container").toggleClass("open");
-    $("#about-menu-handle").toggleClass("slide-right");
+    $("#about-menu-handle").toggleClass("open");
   });
 
   $("#configuration-menu-handle").on("click", function(e) {
     e.preventDefault();
     $("#configuration-menu-container").toggleClass("open");
-    $("#configuration-menu-handle").toggleClass("slide-left");
+    $("#configuration-menu-handle").toggleClass("open");
   });
 
   // Initialize first scenario.
@@ -112,12 +159,10 @@ function activateMenu(tone) {
     e.preventDefault();
     var deferredChain = $.Deferred(),
       reset = deferredChain.done(function() {
-        console.log("RESET MENU!");
         clear();
         $("#menu-button").html("&#9834;");
       }),
       activate = reset.done(function() {
-        console.log("OPEN MENU!");
         $("#menu-button").focus();
         $("#menu-button").trigger("activate");
       });
@@ -128,7 +173,6 @@ function activateMenu(tone) {
     $(".item")
       .one("click", "a", function(e) {
         e.preventDefault();
-        console.log("ANSWER!");
       })
       .one("click.answer.right", "a#" + tone, success)
       .one("click.answer.wrong", "a:not(#" + tone + ")", failure);

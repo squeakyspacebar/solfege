@@ -1,14 +1,16 @@
-@charset "UTF-8";
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+}
 
 body {
   overflow: hidden;
-  background: gray; }
+  background: gray;
+}
 
 a:focus {
-  outline: none; }
+  outline: none;
+}
 
 /* Answer feedback ring. */
 #ring {
@@ -25,31 +27,42 @@ a:focus {
   border-radius: 100%;
   opacity: .5;
   -webkit-transition: 1s;
-  transition: 1s; }
-  #ring:hover {
+  transition: 1s;
+
+  &:hover {
     box-shadow: 0 0 2em white, 0 0 4em white, inset 0 0 2em white;
     border: .4em solid white;
     opacity: 1;
     -webkit-transition: 1s;
-    transition: 1s; }
-  #ring.success {
+    transition: 1s;
+  }
+  
+  &.success {
     box-shadow: 0 0 2.0em lime, 0 0 3.0em lime, inset 0 0 2.0em lime;
-    border: 0.4em solid lime; }
-    #ring.success:hover {
+    border: 0.4em solid lime;
+
+    &:hover {
       box-shadow: 0 0 2em lime, 0 0 4em lime, inset 0 0 2em lime;
       border: .4em solid lime;
       opacity: 1;
       -webkit-transition: 1s;
-      transition: 1s; }
-  #ring.failure {
+      transition: 1s;
+    }
+  }
+  
+  &.failure {
     box-shadow: 0 0 2em red, 0 0 3em red, inset 0 0 2em red;
-    border: 0.4em solid red; }
-    #ring.failure:hover {
+    border: 0.4em solid red;
+
+    &:hover {
       box-shadow: 0 0 2em red, 0 0 4em red, inset 0 0 2em red;
       border: .4em solid red;
       opacity: 1;
       -webkit-transition: 1s;
-      transition: 1s; }
+      transition: 1s;
+    }
+  }
+}
 
 /* Central activation button. */
 #menu-button {
@@ -74,21 +87,28 @@ a:focus {
   outline: none;
   -webkit-transition: 1s;
   transition: 1s;
-  /* Make the radial menu appear on click. */ }
-  #menu-button.success {
+
+  &.success {
     box-shadow: 0 0 .1em 0 lime;
     background: lime;
     color: green;
-    text-shadow: 0 -1px lime; }
-  #menu-button.failure {
+    text-shadow: 0 -1px lime;
+  }
+  
+  &.failure {
     box-shadow: 0 0 0.1em 0 red;
     background: red;
     color: darkred;
-    text-shadow: 0 -1px red; }
-  #menu-button:focus + #menu {
+    text-shadow: 0 -1px red;
+  }
+  
+  /* Make the radial menu appear on click. */
+  &:focus + #menu {
     -webkit-transform: scale(1);
     transform: scale(1);
-    opacity: 1; }
+    opacity: 1;
+  }
+}
 
 /* Radial menu. */
 #menu {
@@ -103,9 +123,10 @@ a:focus {
   list-style: none;
   -webkit-transition: 1s;
   transition: 1s;
-  -webkit-transform: scale(0.001);
-  transform: scale(0.001);
-  opacity: 0; }
+  -webkit-transform: scale(.001);
+  transform: scale(.001);
+  opacity: 0;
+}
 
 /* Slices of the circular menu. */
 .item {
@@ -115,6 +136,7 @@ a:focus {
   height: 50%;
   -webkit-transform-origin: 100% 100%;
   transform-origin: 100% 100%;
+
   /* 
    * rotate each slice at the right angle = (A/2)° + (k - (n+1)/2)*A°
    * where A is the angle of 1 slice (30° in this case)
@@ -125,39 +147,49 @@ a:focus {
    * 
    * after rotating, skew on Y by 90°-A°; here A° = the angle for 1 slice = 30° 
    */
-  /* Clickable elements of the menu slices. */ }
-  .item:nth-child(1) {
+  &:nth-child(1) {
     -webkit-transform: rotate(25.71deg) skewY(38.57deg);
-    transform: rotate(25.71deg) skewY(38.57deg); }
-  .item:nth-child(2) {
+    transform: rotate(25.71deg) skewY(38.57deg);
+  }
+  &:nth-child(2) {
     -webkit-transform: rotate(77.14deg) skewY(38.57deg);
-    transform: rotate(77.14deg) skewY(38.57deg); }
-  .item:nth-child(3) {
+    transform: rotate(77.14deg) skewY(38.57deg);
+  }
+  &:nth-child(3) {
     -webkit-transform: rotate(128.6deg) skewY(38.57deg);
-    transform: rotate(128.6deg) skewY(38.57deg); }
-  .item:nth-child(4) {
+    transform: rotate(128.6deg) skewY(38.57deg);
+  }
+  &:nth-child(4) {
     -webkit-transform: rotate(180deg) skewY(38.57deg);
-    transform: rotate(180deg) skewY(38.57deg); }
-  .item:nth-child(5) {
+    transform: rotate(180deg) skewY(38.57deg);
+  }
+  &:nth-child(5) {
     -webkit-transform: rotate(-128.6deg) skewY(38.57deg);
-    transform: rotate(-128.6deg) skewY(38.57deg); }
-  .item:nth-child(6) {
+    transform: rotate(-128.6deg) skewY(38.57deg);
+  }
+  &:nth-child(6) {
     -webkit-transform: rotate(-77.14deg) skewY(38.57deg);
-    transform: rotate(-77.14deg) skewY(38.57deg); }
-  .item:nth-child(7) {
+    transform: rotate(-77.14deg) skewY(38.57deg);
+  }
+  &:nth-child(7) {
     -webkit-transform: rotate(-25.71deg) skewY(38.57deg);
-    transform: rotate(-25.71deg) skewY(38.57deg); }
-  .item a {
+    transform: rotate(-25.71deg) skewY(38.57deg);
+  }
+
+  /* Clickable elements of the menu slices. */
+  a {
     display: block;
     z-index: 3;
     opacity: .56;
-    width: 200%;
-    height: 200%;
+    width: 200%; height: 200%;
     border-radius: 50%;
     box-shadow: 0 0 3px dimgray, inset 0 0 4px white;
     -webkit-transform: skewY(-38.57deg) rotate(-27.71deg);
     transform: skewY(-38.57deg) rotate(-27.71deg);
-    background: linear-gradient(75deg, transparent 50%, gray 50%, transparent 54%) no-repeat 0% 0, linear-gradient(-75deg, transparent 50%, gray 50%, transparent 54%) no-repeat 0% 0, radial-gradient(rgba(127, 127, 127, 0) 49%, rgba(255, 255, 255, 0.7) 51%, #c9c9c9 52%);
+    background:
+      linear-gradient(75deg, transparent 50%, gray 50%, transparent 54%) no-repeat 0% 0,
+      linear-gradient(-75deg, transparent 50%, gray 50%, transparent 54%) no-repeat 0% 0,
+      radial-gradient(rgba(127,127,127,0) 49%, rgba(255,255,255,.7) 51%, #c9c9c9 52%);
     background-size: 15% 15%, 15% 15%, cover;
     line-height: 1.5em;
     color: #7a8092;
@@ -165,6 +197,10 @@ a:focus {
     text-decoration: none;
     text-shadow: 0 -1px dimgray;
     outline: none;
-    /* Hover feedback for selected slice. */ }
-    .item a:hover, .item a:focus {
-      opacity: 1; }
+
+    /* Hover feedback for selected slice. */
+    &:hover, &:focus {
+      opacity: 1;
+    }
+  }
+}
