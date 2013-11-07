@@ -1,30 +1,121 @@
-// Used to determine which audio file to load for each tone.
-var toneMap = {
-  "do" : "c4.ogg",
-  "re" : "d4.ogg",
-  "mi" : "e4.ogg",
-  "fa" : "f4.ogg",
-  "so" : "g4.ogg",
-  "la" : "a4.ogg",
-  "ti" : "b4.ogg",
-};
+function Note(syllable, octave) {
+  this.name = configuration.activeKey[syllable];
+  this.syllable = syllable;
+  this.octave = octave;
+}
 
 // All the notes with accents must be given as flats.  This is because they are
 // used to find the associated audio filenames where all accents are flat.
 var keys = {
   "major" : {
-    "c"  : ["c", "d", "e", "f", "g", "a", "b"],
-    "g"  : ["g", "a", "b", "c", "d", "e", "gb"],
-    "d"  : ["d", "e", "gb", "g", "a", "b", "db"],
-    "a"  : ["a", "b", "db", "d", "e", "gb", "ab"],
-    "e"  : ["e", "gb", "ab", "a", "b", "db", "eb"],
-    "b"  : ["b", "db", "eb", "e", "gb", "ab", "bb"],
-    "f#" : ["gb", "ab", "bb", "b", "db", "eb", "f"],
-    "db" : ["db", "eb", "f", "gb", "ab", "bb", "c"],
-    "ab" : ["ab", "bb", "c", "db", "eb", "f", "g"],
-    "eb" : ["eb", "f", "g", "ab", "bb", "c", "g"],
-    "bb" : ["bb", "c", "d", "eb", "f", "g", "a"],
-    "f"  : ["f", "g", "a", "bb", "c", "d", "e"],
+    "c" : {
+      "do" : "c",
+      "re" : "d",
+      "mi" : "e",
+      "fa" : "f",
+      "so" : "g",
+      "la" : "a",
+      "ti" : "b",
+    },
+    "g" : {
+      "do" : "g",
+      "re" : "a",
+      "mi" : "b",
+      "fa" : "c",
+      "so" : "d",
+      "la" : "e",
+      "ti" : "gb",
+    },
+    "d" : {
+      "do" : "d",
+      "re" : "e",
+      "mi" : "gb",
+      "fa" : "g",
+      "so" : "a",
+      "la" : "b",
+      "ti" : "db",
+    },
+    "a" : {
+      "do" : "a",
+      "re" : "b",
+      "mi" : "db",
+      "fa" : "d",
+      "so" : "e",
+      "la" : "gb",
+      "ti" : "ab",
+    },
+    "e" : {
+      "do" : "e",
+      "re" : "gb",
+      "mi" : "ab",
+      "fa" : "a",
+      "so" : "b",
+      "la" : "db",
+      "ti" : "eb",
+    },
+    "b" : {
+      "do" : "b",
+      "re" : "db",
+      "mi" : "eb",
+      "fa" : "e",
+      "so" : "gb",
+      "la" : "ab",
+      "ti" : "bb",
+    },
+    "f#" : {
+      "do" : "gb",
+      "re" : "ab",
+      "mi" : "bb",
+      "fa" : "b",
+      "so" : "db",
+      "la" : "eb",
+      "ti" : "f",
+    },
+    "db" : {
+      "do" : "db",
+      "re" : "eb",
+      "mi" : "f",
+      "fa" : "gb",
+      "so" : "ab",
+      "la" : "bb",
+      "ti" : "c",
+    },
+    "ab" : {
+      "do" : "ab",
+      "re" : "bb",
+      "mi" : "c",
+      "fa" : "db",
+      "so" : "eb",
+      "la" : "f",
+      "ti" : "g",
+    },
+    "eb" : {
+      "do" : "eb",
+      "re" : "f",
+      "mi" : "g",
+      "fa" : "ab",
+      "so" : "bb",
+      "la" : "c",
+      "ti" : "g",
+    },
+    "bb" : {
+      "do" : "bb",
+      "re" : "c",
+      "mi" : "d",
+      "fa" : "eb",
+      "so" : "f",
+      "la" : "g",
+      "ti" : "a",
+    },
+    "f" : {
+      "do" : "f",
+      "re" : "g",
+      "mi" : "a",
+      "fa" : "bb",
+      "so" : "c",
+      "la" : "d",
+      "ti" : "e",
+    },
   },
   "minor" : {
     "a"  : ["a", "b", "c", "d", "e", "f", "g"],
@@ -44,6 +135,15 @@ var keys = {
 
 var configuration = {
   "activeKey" : keys.major.c,
+  "activeSyllables" : {
+    "do" : true,
+    "re" : true,
+    "mi" : false,
+    "fa" : true,
+    "so" : false,
+    "la" : true,
+    "ti" : true,
+  },
   "activeOctaves" : {
     1 : true,
     2 : true,
@@ -52,8 +152,7 @@ var configuration = {
     5 : true,
     6 : true,
     7 : true,
-    8 : true,
-  }
+  },
 }
 
 var audio = document.getElementById("voice");
@@ -85,23 +184,21 @@ function init() {
   generateScenario();
 }
 
-// Generates the tone.
-function getTone() {
-  // Select a tone from the map at random.
-  var tones = Object.keys(toneMap);
-  var numberOfTones = tones.length;
-  var tone = tones[Math.floor(Math.random() * numberOfTones)];
-  
-  return tone;
+// Determines the octave.
+function getOctave(octaves) {
+  return octaves[Math.floor(Math.random() * octaves.length)];
 }
 
-// Takes a tone, finds its file via the tone map, and sets the file to play.
-function setTone(tone) {
-  // Determine audio file to load.
-  var toneFile = toneMap[tone];
+// Determines the syllable.
+function getSyllable(syllables) {
+  return syllables[Math.floor(Math.random() * syllables.length)];
+}
 
+// Finds the proper audio file and sets it to play.
+function setNote(note) {
+  var filename = note.name + note.octave + ".ogg";
   // Set the proper file as the audio source.
-  $("#voice").attr("src", "audio/" + toneFile);
+  $("#voice").attr("src", "audio/" + filename);
 }
 
 function enableAudio() {
@@ -153,7 +250,7 @@ function failure() {
   $("#menu-button").addClass("failure");
 }
 
-function activateMenu(tone) {
+function activateMenu(note) {
   enableAudio();
   $("#menu-button").on("click", function(e) {
     e.preventDefault();
@@ -174,8 +271,8 @@ function activateMenu(tone) {
       .one("click", "a", function(e) {
         e.preventDefault();
       })
-      .one("click.answer.right", "a#" + tone, success)
-      .one("click.answer.wrong", "a:not(#" + tone + ")", failure);
+      .one("click.answer.right", "a#" + note.syllable, success)
+      .one("click.answer.wrong", "a:not(#" + note.syllable + ")", failure);
   });
 }
 
@@ -185,15 +282,40 @@ function deactivateMenu() {
 
 // Generates a new scenario.
 function generateScenario() {
+  var syllables = new Array();
+  var octaves = new Array();
+
+  for (var octave in configuration.activeOctaves) {
+    if(configuration.activeOctaves[octave]) {
+      octaves.push(octave);
+    }
+  }
+
   var deferredChain = $.Deferred(),
     get = deferredChain.then(function() {
-      return getTone();
+      for (var syllable in configuration.activeSyllables) {
+        if(configuration.activeSyllables[syllable]) {
+          syllables.push(syllable);
+        }
+      }
+
+      for (var octave in configuration.activeOctaves) {
+        if(configuration.activeOctaves[octave]) {
+          octaves.push(octave);
+        }
+      }
+
+      var selectedSyllable = getSyllable(syllables);
+      var selectedOctave = getOctave(octaves);
+
+      return new Note(selectedSyllable, selectedOctave);
     }),
-    set = get.done(function(tone) {
-      setTone(tone);
+    set = get.done(function(note) {
+      setNote(note);
     }),
-    finished = set.done(function(tone) {
-      activateMenu(tone);
+    finished = set.done(function(note) {
+      console.log(note);
+      activateMenu(note);
     });
   deferredChain.resolve();
 }
