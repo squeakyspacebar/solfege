@@ -1,43 +1,94 @@
-.slide-menu-handle {
-  display: block;
-  position: absolute;
-  width: 2.0em;
-  height: 100%;
-  background: #2f2f2f;
-  color: white;
-  text-decoration: none;
-  text-align: center; }
-
-.slide-menu-handle-left {
-  left: 0; }
-  .slide-menu-handle-left.open {
-    left: 30%; }
-
-.slide-menu-handle-right {
-  right: 0; }
-  .slide-menu-handle-right.open {
-    right: 30%; }
-
-.slide-menu {
-  position: fixed;
-  top: 0;
-  width: 30%;
-  height: 100%;
-  z-index: 9001;
-  background: gainsboro; }
-
-.slide-menu-vertical {
-  top: 0;
-  width: 30%;
-  height: 100%;
-  z-index: 9001; }
-
-.slide-menu-left {
-  left: -30%; }
-  .slide-menu-left.open {
+@media screen and (orientation: landscape) {
+  #about-menu-handle {
     left: 0; }
+    #about-menu-handle.open {
+      left: 30%; }
 
-.slide-menu-right {
-  right: -30%; }
-  .slide-menu-right.open {
+  #configuration-menu-handle {
     right: 0; }
+    #configuration-menu-handle.open {
+      right: 30%; }
+
+  #about-menu-container {
+    left: -30%; }
+    #about-menu-container.open {
+      left: 0; }
+
+  #configuration-menu-container {
+    right: -30%; }
+    #configuration-menu-container.open {
+      right: 0; }
+
+  .sliding-menu-handle {
+    display: block;
+    position: absolute;
+    width: 3em;
+    height: 100%;
+    background: #2f2f2f;
+    color: white;
+    text-decoration: none;
+    text-align: center; }
+
+  .sliding-menu-container {
+    position: fixed;
+    top: 0;
+    width: 30%;
+    height: 100%;
+    z-index: 9001;
+    background: gainsboro; } }
+/*@media screen and (orientation: portrait) {
+  $menu-width: 100%;
+  $handle-width: 4.0em;
+
+  #about-menu-handle {
+    top: 0;
+  
+    &.open {
+      bottom: 0;
+    }
+  }
+  
+  #configuration-menu-handle {
+    bottom: 0;
+  
+    &.open {
+      top: 0;
+    }
+  }
+  
+  #about-menu-container {
+    top: -$menu-width;
+  
+    &.open {
+      bottom: $handle-width;
+    }
+  }
+
+  #configuration-menu-container {
+    bottom: -$menu-width;
+  
+    &.open {
+      top: $handle-width;
+    }
+  }
+
+  .sliding-menu-handle {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: $handle-width;
+    background: #2f2f2f;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .sliding-menu-container {
+    position: fixed;
+    top: 0;
+    width: $menu-width;
+    height: 100%;
+    z-index: 9001;
+    background: gainsboro;
+  }
+}*/

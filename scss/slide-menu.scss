@@ -1,60 +1,113 @@
-$menu-width: 30%;
-
-.slide-menu-handle {
-  display: block;
-  position: absolute;
-  width: 2.0em;
-  height: 100%;
-  background: #2f2f2f;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-}
-
-.slide-menu-handle-left {
-  left: 0;
-
-  &.open {
-    left: $menu-width;
-  }
-}
-
-.slide-menu-handle-right {
-  right: 0;
-
-  &.open {
-    right: $menu-width;
-  }
-}
-
-.slide-menu {
-  position: fixed;
-  top: 0;
-  width: $menu-width;
-  height: 100%;
-  z-index: 9001;
-  background: gainsboro;
-}
-
-.slide-menu-vertical {
-  top: 0;
-  width: $menu-width;
-  height: 100%;
-  z-index: 9001;
-}
-
-.slide-menu-left {
-  left: -$menu-width;
-
-  &.open {
+@media screen and (orientation: landscape) {
+  $menu-width: 30%;
+  $handle-size: 3em;
+  
+  #about-menu-handle {
     left: 0;
+  
+    &.open {
+      left: $menu-width;
+    }
+  }
+  
+  #configuration-menu-handle {
+    right: 0;
+  
+    &.open {
+      right: $menu-width;
+    }
+  }
+  
+  #about-menu-container {
+    left: -$menu-width;
+  
+    &.open {
+      left: 0;
+    }
+  }
+
+  #configuration-menu-container {
+    right: -$menu-width;
+  
+    &.open {
+      right: 0;
+    }
+  }
+
+  .sliding-menu-handle {
+    display: block;
+    position: absolute;
+    width: $handle-size;
+    height: 100%;
+    background: #2f2f2f;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .sliding-menu-container {
+    position: fixed;
+    top: 0;
+    width: $menu-width;
+    height: 100%;
+    z-index: 9001;
+    background: gainsboro;
   }
 }
 
-.slide-menu-right {
-  right: -$menu-width;
+@media screen and (orientation: portrait) {
+  $menu-width: 100%;
+  $handle-width: 4.0em;
 
-  &.open {
-    right: 0;
+  #about-menu-handle {
+    top: 0;
+  
+    &.open {
+      bottom: 0;
+    }
+  }
+  
+  #configuration-menu-handle {
+    bottom: 0;
+  
+    &.open {
+      top: 0;
+    }
+  }
+  
+  #about-menu-container {
+    top: -$menu-width;
+  
+    &.open {
+      bottom: $handle-width;
+    }
+  }
+
+  #configuration-menu-container {
+    bottom: -$menu-width;
+  
+    &.open {
+      top: $handle-width;
+    }
+  }
+
+  .sliding-menu-handle {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: $handle-width;
+    background: #2f2f2f;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .sliding-menu-container {
+    position: fixed;
+    top: 0;
+    width: $menu-width;
+    height: 100%;
+    z-index: 9001;
+    background: gainsboro;
   }
 }
