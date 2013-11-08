@@ -4,21 +4,20 @@
   <title>Solfège Ear Training</title>
   <meta charset ="utf-8">
   <meta name="description" content="Solfege ear training">
-  <meta name="keywords" content="ear, music, solfege, tone, training">
   <meta name="author" content="Andy Lo">
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/slide-menu.css" />
   <link rel="stylesheet" href="css/accordion-menu.css" />
 </head>
 <body>
-  <!-- Push Menu Handles -->
-  <a id="about-menu-handle" class="slide-menu-handle slide-menu-handle-left" href="#">&#8250;</a>
-  <a id="configuration-menu-handle" class="slide-menu-handle slide-menu-handle-right" href="#">&#8249;</a>
-  <!-- Push Menu Content -->
-  <nav id="about-menu-container" class="slide-menu slide-menu-vertical slide-menu-left">
+  <!-- Sliding Menu Handles -->
+  <a id="about-menu-handle" class="sliding-menu-handle" href="#">&#8250;</a>
+  <a id="configuration-menu-handle" class="sliding-menu-handle" href="#">&#8249;</a>
+  <!-- Sliding Menu Content -->
+  <nav id="about-menu-container" class="sliding-menu-container">
     <ul id="about-menu" class="accordion">
-      <li id="about-menu-1">
-        <a href="#about-menu-1">About</a>
+      <li id="about">
+        <a href="#about">About</a>
         <div class="sub-content">
           <div class="content">
             <p>This is a small personal design project for an ear training tool using solfège.
@@ -42,8 +41,8 @@
           </div>
         </div>
       </li>
-      <li id="about-menu-2">
-        <a href="#about-menu-2">How to Use</a>
+      <li id="manual">
+        <a href="#manual">How to Use</a>
         <div class="sub-content">
           <div class="content">
             <p>Simply press the icon in the center of the screen to play a tone and activate the
@@ -55,41 +54,42 @@
           </div>
         </div>
       </li>
-      <li id="about-menu-3">
-        <a href="#about-menu-3">Credit</a>
+      <li id="credit">
+        <a href="#credit">Credit</a>
         <div class="sub-content">
           <div class="content">
             <p>This project utilizes techniques from inspired by several different sources.
               In the interest of due credit, here is a list:</p><br />
             <ul>
               <li>
-                Piano Recordings: University of Iowa Electronic Music Studios<br />
+                <span>Piano Recordings: </span><br />
                 <a href="http://theremin.music.uiowa.edu/index.html" target="_blank">
-                  http://theremin.music.uiowa.edu/index.html
+                  University of Iowa Electronic Music Studios
                 </a>
               </li>
               <li>
-                CSS Radial Menu: Ana Tudor<br />
+                <span>CSS Radial Menu: </span><br />
                 <a href="http://dabblet.com/gist/3979221/cb69c5e8ccf0745fff2c94b47b27b108931f1a15" target="_blank">
-                  http://dabblet.com/gist/3979221/cb69c5e8ccf0745fff2c94b47b27b108931f1a15
+                  Ana Tudor<br />
                 </a>
               </li>
               <li>
-                Sliding Menus: Tympanus (Blueprints)<br />
+                <span>Sliding Menus: </span><br />
                 <a href="http://tympanus.net/Blueprints/SlidePushMenus/" target="_blank">
-                  http://tympanus.net/Blueprints/SlidePushMenus/
+                  Tympanus (Blueprints)
                 </a>
               </li>
               <li>
-                CSS Accordion Menus: Valeriu Timbuc at Designmodo<br />
+                <span>Accordion Menus: </span><br />
                 <a href="http://designmodo.com/css3-accordion-menu/" target="_blank">
-                  http://designmodo.com/css3-accordion-menu/
+                  Valeriu Timbuc at Designmodo<br />
                 </a>
               </li>
             </ul>
           </div>
         </div>
       </li>
+<<<<<<< HEAD
       <li id="about-menu-4">
         <a href="#about-menu-4">Code</a>
         <div class="sub-content">
@@ -100,6 +100,10 @@
       </li>
       <li id="about-menu-5">
         <a href="#about-menu-5">Contact</a>
+=======
+      <li id="contact">
+        <a href="#contact">Contact</a>
+>>>>>>> develop
         <div class="sub-content">
           <div class="content">
             <p>Have any questions or comments?  Contact me via e-mail at andy.lo&#60;at&#62;gmx.com.</p>
@@ -108,10 +112,103 @@
       </li>
     </ul>
   </nav>
-  <nav id="configuration-menu-container" class="slide-menu slide-menu-vertical slide-menu-right">
+  <nav id="configuration-menu-container" class="sliding-menu-container">
     <ul id="configuration-menu" class="accordion">
-      <li id="configuration-menu-1"><a href="#">Octaves</a></li>
-      <li id="configuration-menu-2"><a href="#">Keys</a></li>
+      <li id="keys">
+        <a href="#keys">Keys</a>
+        <div class="sub-content">
+          <div class="content">
+            <fieldset id="major-keys">
+              <legend><h3>Major Keys</h3></legend>
+              <input type="radio" name="key" id="c-major" value="c-major" checked />
+              <label for="c-major">C Major</label><br />
+              <input type="radio" name="key" id="g-major" value="g-major" />
+              <label for="g-major">G Major</label><br />
+              <input type="radio" name="key" id="d-major" value="d-major" />
+              <label for="d-major">D Major</label><br />
+              <input type="radio" name="key" id="a-major" value="a-major" />
+              <label for="a-major">A Major</label><br />
+              <input type="radio" name="key" id="e-major" value="e-major" />
+              <label for="e-major">E Major</label><br />
+              <input type="radio" name="key" id="b-major" value="b-major" />
+              <label for="b-major">B Major</label><br />
+              <input type="radio" name="key" id="gb-major" value="gb-major" />
+              <label for="gb-major">F#/Gb Major</label><br />
+    <input type="radio" name="key" id="db-major" value="db-major" />
+              <label for="db-major">C#/Db Major</label><br />
+    <input type="radio" name="key" id="ab-major" value="ab-major" />
+              <label for="ab-major">Ab Major</label><br />
+              <input type="radio" name="key" id="eb-major" value="eb-major" />
+              <label for="eb-major">Eb Major</label><br />
+              <input type="radio" name="key" id="bb-major" value="bb-major" />
+              <label for="bb-major">Bb Major</label><br />
+              <input type="radio" name="key" id="f-major" value="f-major" />
+              <label for="f-major">F Major</label><br />
+              </legend>
+            </fieldset>
+            <fieldset id="minor-keys">
+              <legend><h3>Minor Keys</h3></legend>
+              <input type="radio" name="key" id="a-minor" value="a-minor" />
+              <label for="a-minor">A Minor</label><br />
+              <input type="radio" name="key" id="e-minor" value="e-minor" />
+              <label for="e-minor">E Minor</label><br />
+              <input type="radio" name="key" id="b-minor" value="b-minor" />
+              <label for="b-minor">B Minor</label><br />
+              <input type="radio" name="key" id="f#-minor" value="f#-minor" />
+              <label for="f#-minor">F# Minor</label><br />
+              <input type="radio" name="key" id="c#-minor" value="c#-minor" />
+              <label for="c#-minor">C# Minor</label><br />
+              <input type="radio" name="key" id="g#-minor" value="g#-minor" />
+              <label for="g#-minor">G# Minor</label><br />
+              <input type="radio" name="key" id="eb-minor" value="eb-minor" />
+              <label for="eb-minor">Eb Minor</label><br />
+              <input type="radio" name="key" id="bb-minor" value="bb-minor" />
+              <label for="bb-minor">Bb Minor</label><br />
+              <input type="radio" name="key" id="f-minor" value="f-minor" />
+              <label for="f-minor">F Minor</label><br />
+              <input type="radio" name="key" id="c-minor" value="c-minor" />
+              <label for="c-minor">C Minor</label><br />
+              <input type="radio" name="key" id="g-minor" value="g-minor" />
+              <label for="g-minor">G Minor</label><br />
+              <input type="radio" name="key" id="d-minor" value="d-minor" />
+              <label for="d-minor">D Minor</label><br />
+              </legend>
+            </fieldset>
+          </div>
+        </div>
+      </li>
+      <li id="syllables">
+        <a href="#syllables">Syllables</a>
+        <div class="sub-content">
+          <div class="content">
+            <div id="syllables">
+              <input type="checkbox" value="do" checked />Do<br />
+              <input type="checkbox" value="re" checked />Re<br />
+              <input type="checkbox" value="mi" checked />Mi<br />
+              <input type="checkbox" value="fa" checked />Fa<br />
+              <input type="checkbox" value="so" checked />So<br />
+              <input type="checkbox" value="la" checked />La<br />
+              <input type="checkbox" value="ti" checked />Ti<br />
+            </div>
+          </div>
+        </div>
+      </li>
+      <li id="octaves">
+        <a href="#octaves">Octaves</a>
+        <div class="sub-content">
+          <div class="content">
+            <div id="octaves">
+              <input type="checkbox" value="1" checked />1<br />
+              <input type="checkbox" value="2" checked />2<br />
+              <input type="checkbox" value="3" checked />3<br />
+              <input type="checkbox" value="4" checked />4<br />
+              <input type="checkbox" value="5" checked />5<br />
+              <input type="checkbox" value="6" checked />6<br />
+              <input type="checkbox" value="7" checked />7<br />
+            </div>
+          </div>
+        </div>
+      </li>
     </ul>
   </nav>
   <!-- Training Interface -->
