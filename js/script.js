@@ -1,9 +1,3 @@
-function Note(syllable, octave) {
-  this.name = configuration.activeKey[syllable];
-  this.syllable = syllable;
-  this.octave = octave;
-}
-
 // All the notes with accents must be given as flats.  This is because they are
 // used to find the associated audio filenames where all accents are flat.
 var keys = {
@@ -62,7 +56,7 @@ var keys = {
       "la" : "ab",
       "ti" : "bb",
     },
-    "f#" : {
+    "gb" : {
       "do" : "gb",
       "re" : "ab",
       "mi" : "bb",
@@ -118,18 +112,114 @@ var keys = {
     },
   },
   "minor" : {
-    "a"  : ["a", "b", "c", "d", "e", "f", "g"],
-    "e"  : ["e", "gb", "g", "a", "b", "c", "d"],
-    "b"  : ["b", "db", "d", "e", "gb", "g", "a"],
-    "f#" : ["gb", "ab", "a", "b", "db", "d", "e"],
-    "c#" : ["db", "eb", "e", "gb", "ab", "a", "b"],
-    "g#" : ["ab", "bb", "b", "db", "eb", "e", "gb"],
-    "d#" : ["eb", "f", "gb", "ab", "bb", "b", "db"],
-    "bb" : ["bb", "c", "db", "eb", "f", "g", "ab"],
-    "f"  : ["f", "g", "ab", "bb", "c", "db", "eb"],
-    "c"  : ["c", "d", "eb", "f", "g", "ab", "bb"],
-    "g"  : ["g", "a", "bb", "c", "d", "eb", "f"],
-    "d"  : ["d", "e", "f", "g", "a", "bb", "c"],
+    "a" : {
+      "do" : "a",
+      "re" : "b",
+      "mi" : "c",
+      "fa" : "d",
+      "so" : "e",
+      "la" : "f",
+      "ti" : "g"
+    },
+    "e" : {
+      "do" : "e",
+      "re" : "gb",
+      "mi" : "g",
+      "fa" : "a",
+      "so" : "b",
+      "la" : "c",
+      "ti" : "d",
+    },
+    "b" : {
+      "do" : "b",
+      "re" : "db",
+      "mi" : "d",
+      "fa" : "e",
+      "so" : "gb",
+      "la" : "g",
+      "ti" : "a",
+    },
+    "f#" : {
+      "do" : "gb",
+      "re" : "ab",
+      "mi" : "a",
+      "fa" : "b",
+      "so" : "db",
+      "la" : "d",
+      "ti" : "e",
+    },
+    "c#" : {
+      "do" : "db",
+      "re" : "eb",
+      "mi" : "e",
+      "fa" : "gb",
+      "so" : "ab",
+      "la" : "a",
+      "ti" : "b",
+    },
+    "g#" : {
+      "do" : "ab",
+      "re" : "bb",
+      "mi" : "b",
+      "fa" : "db",
+      "so" : "eb",
+      "la" : "e",
+      "ti" : "gb",
+    },
+    "eb" : {
+      "do" : "eb",
+      "re" : "f",
+      "mi" : "gb",
+      "fa" : "ab",
+      "so" : "bb",
+      "la" : "b",
+      "ti" : "db",
+    },
+    "bb" : {
+      "do" : "bb",
+      "re" : "c",
+      "mi" : "db",
+      "fa" : "eb",
+      "so" : "f",
+      "la" : "g",
+      "ti" : "ab",
+    },
+    "f" : {
+      "do" : "f",
+      "re" : "g",
+      "mi" : "ab",
+      "fa" : "bb",
+      "so" : "c",
+      "la" : "db",
+      "ti" : "eb",
+    },
+    "c" : {
+      "do" : "c",
+      "re" : "d",
+      "mi" : "eb",
+      "fa" : "f",
+      "so" : "g",
+      "la" : "ab",
+      "ti" : "bb",
+    },
+    "g" : {
+      "do" : "g",
+      "re" : "a",
+      "mi" : "bb",
+      "fa" : "c",
+      "so" : "d",
+      "la" : "eb",
+      "ti" : "f",
+    },
+    "d" : {
+      "do" : "d",
+      "re" : "e",
+      "mi" : "f",
+      "fa" : "g",
+      "so" : "a",
+      "la" : "bb",
+      "ti" : "c",
+    },
   },
 };
 
@@ -157,6 +247,13 @@ var configuration = {
 
 var audio = document.getElementById("voice");
 
+function Note(syllable, octave) {
+  this.name = configuration.activeKey[syllable];
+  this.syllable = syllable;
+  this.octave = octave;
+  this.filename = this.name + this.octave + ".ogg";
+}
+
 function init() {
   // Initialize audio controls.
   enableAudio();
@@ -173,12 +270,52 @@ function init() {
     $("#about-menu-container").toggleClass("open");
     $("#about-menu-handle").toggleClass("open");
   });
-
   $("#configuration-menu-handle").on("click", function(e) {
     e.preventDefault();
     $("#configuration-menu-container").toggleClass("open");
     $("#configuration-menu-handle").toggleClass("open");
   });
+
+  // Refreshes the scenario if a configuration change has occurred.
+  $("#configuration-menu").on("config-update", "input", function() {
+    generateScenario();
+  });
+
+  // Read initial configuration state when the script is run.
+  var initKey = ($("input[name='key']").attr("value")).split("-");
+  configuration.activeKey = keys[initKey[1]][initKey[0]];
+  var initSyllables = $("#syllables input");
+  initSyllables.each(function() {
+    configuration.activeSyllables[$(this).attr("value")] =
+      $(this).prop("checked");
+  });
+  var initOctaves = $("#octaves input");
+  initOctaves.each(function() {
+    configuration.activeOctaves[$(this).attr("value")] =
+      $(this).prop("checked");
+  });
+
+  // Updates configuration when the inputs change.
+  $("input[name='key']").on("change", function(e) {
+    var key = ($(e.target).attr("value")).split("-");
+    configuration.activeKey = keys[key[1]][key[0]];
+    console.log(key[0] + " " + key[1]);
+    key.trigger("config-update");
+  });
+  $("#syllables").on("change", "input[type='checkbox']", function(e) {
+    var checkbox = $(e.target);
+    configuration.activeSyllables[checkbox.attr("value")] = 
+      checkbox.prop("checked");
+    checkbox.trigger("config-update");
+  });
+  $("#octaves").on("change", "input[type='checkbox']", function(e) {
+    var checkbox = $(e.target);
+    configuration.activeOctaves[checkbox.attr("value")] = 
+      checkbox.prop("checked");
+    checkbox.trigger("config-update");
+  });
+
+  console.log(initKey[0] + " " + initKey[1]);
 
   // Initialize first scenario.
   generateScenario();
@@ -194,7 +331,7 @@ function getSyllable(syllables) {
   return syllables[Math.floor(Math.random() * syllables.length)];
 }
 
-// Finds the proper audio file and sets it to play.
+// Finds the proper audio file for the given note and sets it as a source.
 function setNote(note) {
   var filename = note.name + note.octave + ".ogg";
   // Set the proper file as the audio source.
@@ -250,6 +387,7 @@ function failure() {
   $("#menu-button").addClass("failure");
 }
 
+// Sets the radial menu feedback for the scenario.
 function activateMenu(note) {
   enableAudio();
   $("#menu-button").on("click", function(e) {
@@ -285,26 +423,23 @@ function generateScenario() {
   var syllables = new Array();
   var octaves = new Array();
 
-  for (var octave in configuration.activeOctaves) {
-    if(configuration.activeOctaves[octave]) {
-      octaves.push(octave);
-    }
-  }
-
   var deferredChain = $.Deferred(),
     get = deferredChain.then(function() {
-      for (var syllable in configuration.activeSyllables) {
+      // Gets an array of the active syllables.
+      for(var syllable in configuration.activeSyllables) {
         if(configuration.activeSyllables[syllable]) {
           syllables.push(syllable);
         }
       }
 
-      for (var octave in configuration.activeOctaves) {
+      // Gets an array of active octaves.
+      for(var octave in configuration.activeOctaves) {
         if(configuration.activeOctaves[octave]) {
           octaves.push(octave);
         }
       }
 
+      // Selects a syllable and octave from the previously generated arrays.
       var selectedSyllable = getSyllable(syllables);
       var selectedOctave = getOctave(octaves);
 
