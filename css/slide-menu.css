@@ -1,4 +1,4 @@
-@media screen and (orientation: landscape) {
+@media only screen and (orientation: landscape) {
   #about-menu-toggle, #configuration-menu-toggle {
     display: none; }
 
@@ -42,7 +42,7 @@
     height: 100%;
     z-index: 9001;
     background: gainsboro; } }
-@media screen and (orientation: portrait) {
+@media only screen and (orientation: portrait) {
   #about-menu-toggle, #configuration-menu-toggle {
     display: none;
     visibility: hidden; }
