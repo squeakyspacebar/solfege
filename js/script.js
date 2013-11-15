@@ -254,7 +254,97 @@ function Note(syllable, octave) {
   this.filename = this.name + this.octave + ".ogg";
 }
 
+function aboutHandleToggle() {
+  if(Modernizr.mq("only screen and (orientation: landscape)")) {
+     if($("#about-menu-toggle").prop("checked")) {
+      $("#about-menu-handle i")
+        .removeClass("fa-angle-double-right")
+        .addClass("fa-angle-double-left");
+    } else {
+      $("#about-menu-handle i")
+        .removeClass("fa-angle-double-left")
+        .addClass("fa-angle-double-right");
+    }
+  } else if(Modernizr.mq("only screen and (orientation: portrait)")) {
+    if($("#about-menu-toggle").prop("checked")) {
+      $("#about-menu-handle i")
+        .removeClass("fa-angle-double-down")
+        .addClass("fa-angle-double-up");
+    } else {
+      $("#about-menu-handle i")
+        .removeClass("fa-angle-double-up")
+        .addClass("fa-angle-double-down");
+    }
+  }
+}
+
+function configurationHandleToggle() {
+  if(Modernizr.mq("only screen and (orientation: landscape)")) {
+    if($("#configuration-menu-toggle").prop("checked")) {
+      $("#configuration-menu-handle i")
+        .removeClass("fa-angle-double-left")
+        .addClass("fa-angle-double-right");
+    } else {
+      $("#configuration-menu-handle i")
+        .removeClass("fa-angle-double-right")
+        .addClass("fa-angle-double-left");
+    }
+  } else if(Modernizr.mq("only screen and (orientation: portrait)")) {
+    if($("#configuration-menu-toggle").prop("checked")) {
+      $("#configuration-menu-handle i")
+        .removeClass("fa-angle-double-up")
+        .addClass("fa-angle-double-down");
+    } else {
+      $("#configuration-menu-handle i")
+        .removeClass("fa-angle-double-down")
+        .addClass("fa-angle-double-up");
+    }
+  }
+}
+
+function updateHandles() {
+  aboutHandleToggle();
+  configurationHandleToggle();
+}
+
 function init() {
+  // Portrait orientation sliding menu handling.
+  if(Modernizr.mq("only screen and (orientation: landscape)")) {
+    $("#about-menu-toggle").on("change", function() {
+      updateHandles();
+    }
+    $("#configuration-menu-toggle").on("change", function() {
+      updateHandles();
+    }
+  } else if(Modernizr.mq("only screen and (orientation: portrait)")) {
+    // Change the orientation of the handle arrows to vertical.
+    $("#about-menu-handle i")
+      .removeClass()
+      .addClass("fa fa-angle-double-down");
+    $("#configuration-menu-handle i")
+      .removeClass()
+      .addClass("fa fa-angle-double-up");
+
+    // Since the portrait mode menus take up the entire window, it's necessary
+    // to make them mutually exclusive in this case.
+    $("#about-menu-toggle").on("change", function() {
+      if(this.checked) {
+        if($("#configuration-menu-toggle").prop("checked")) {
+          $("#configuration-menu-toggle").prop("checked", false);
+        }
+      }
+      updateHandles();
+    });
+    $("#configuration-menu-toggle").on("change", function() {
+      if(this.checked) {
+        if($("#about-menu-toggle").prop("checked")) {
+          $("#about-menu-toggle").prop("checked", false);
+        }
+      }
+      updateHandles();
+    });
+  }
+
   // Initialize audio controls.
   enableAudio();
 
