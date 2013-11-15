@@ -1,4 +1,4 @@
-@media screen and (orientation: landscape) {
+@media only screen and (orientation: landscape) {
   $menu-width: 30%;
   $handle-size: 3em;
   
@@ -64,7 +64,7 @@
   }
 }
 
-@media screen and (orientation: portrait) {
+@media only screen and (orientation: portrait) {
   $menu-width: 100%;
   $handle-size: 4em;
 
