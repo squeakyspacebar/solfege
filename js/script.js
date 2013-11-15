@@ -264,18 +264,6 @@ function init() {
     enableAudio();
   });
 
-  // Define menu handle behaviors.
-  $("#about-menu-handle").on("click", function(e) {
-    e.preventDefault();
-    $("#about-menu-container").toggleClass("open");
-    $("#about-menu-handle").toggleClass("open");
-  });
-  $("#configuration-menu-handle").on("click", function(e) {
-    e.preventDefault();
-    $("#configuration-menu-container").toggleClass("open");
-    $("#configuration-menu-handle").toggleClass("open");
-  });
-
   // Refreshes the scenario if a configuration change has occurred.
   $("#configuration-menu").on("config-update", "input", function() {
     generateScenario();
@@ -369,11 +357,13 @@ function stopAudio() {
 function clear() {
   $("#ring").removeClass("success failure");
   $("#menu-button").removeClass("success failure");
+  $("#menu-button i").removeClass();
 }
 
 // Generate answer feedback for correct guesses.
 function success() {
-  $("#menu-button").html("&#10003;");
+  clear();
+  $("#menu-button i").addClass("fa fa-check");
   $("#ring").addClass("success");
   $("#menu-button").addClass("success");
   deactivateMenu();
@@ -382,7 +372,8 @@ function success() {
 
 // Generate answer feedback for incorrect guesses.
 function failure() {
-  $("#menu-button").html("&#10060;");
+  clear();
+  $("#menu-button i").addClass("fa fa-times");
   $("#ring").addClass("failure");
   $("#menu-button").addClass("failure");
 }
@@ -395,7 +386,7 @@ function activateMenu(note) {
     var deferredChain = $.Deferred(),
       reset = deferredChain.done(function() {
         clear();
-        $("#menu-button").html("&#9834;");
+        $("#menu-button i").addClass("fa fa-play-circle");
       }),
       activate = reset.done(function() {
         $("#menu-button").focus();

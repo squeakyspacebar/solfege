@@ -1,23 +1,28 @@
 @media screen and (orientation: landscape) {
+  #about-menu-toggle, #configuration-menu-toggle {
+    display: none; }
+
   #about-menu-handle {
     left: 0; }
-    #about-menu-handle.open {
-      left: 30%; }
 
   #configuration-menu-handle {
     right: 0; }
-    #configuration-menu-handle.open {
-      right: 30%; }
 
   #about-menu-container {
     left: -30%; }
-    #about-menu-container.open {
-      left: 0; }
 
   #configuration-menu-container {
     right: -30%; }
-    #configuration-menu-container.open {
-      right: 0; }
+
+  #about-menu-toggle:checked ~ #about-menu-handle {
+    left: 30%; }
+  #about-menu-toggle:checked ~ #about-menu-container {
+    left: 0; }
+
+  #configuration-menu-toggle:checked ~ #configuration-menu-handle {
+    right: 30%; }
+  #configuration-menu-toggle:checked ~ #configuration-menu-container {
+    right: 0; }
 
   .sliding-menu-handle {
     display: block;
@@ -27,7 +32,8 @@
     background: #2f2f2f;
     color: white;
     text-decoration: none;
-    text-align: center; }
+    text-align: center;
+    cursor: pointer; }
 
   .sliding-menu-container {
     position: fixed;
@@ -36,59 +42,48 @@
     height: 100%;
     z-index: 9001;
     background: gainsboro; } }
-/*@media screen and (orientation: portrait) {
-  $menu-width: 100%;
-  $handle-width: 4.0em;
+@media screen and (orientation: portrait) {
+  #about-menu-toggle, #configuration-menu-toggle {
+    display: none;
+    visibility: hidden; }
 
   #about-menu-handle {
-    top: 0;
-  
-    &.open {
-      bottom: 0;
-    }
-  }
-  
+    top: 0; }
+
   #configuration-menu-handle {
-    bottom: 0;
-  
-    &.open {
-      top: 0;
-    }
-  }
-  
+    bottom: 0; }
+
   #about-menu-container {
-    top: -$menu-width;
-  
-    &.open {
-      bottom: $handle-width;
-    }
-  }
+    top: -100%; }
 
   #configuration-menu-container {
-    bottom: -$menu-width;
-  
-    &.open {
-      top: $handle-width;
-    }
-  }
+    bottom: -100%; }
+
+  #about-menu-toggle:checked ~ #about-menu-handle {
+    top: auto;
+    bottom: 4em; }
+  #about-menu-toggle:checked ~ #about-menu-container {
+    top: 0;
+    bottom: 8em; }
+
+  #configuration-menu-toggle:checked ~ #configuration-menu-handle {
+    top: 4em;
+    bottom: auto; }
+  #configuration-menu-toggle:checked ~ #configuration-menu-container {
+    top: 8em; }
 
   .sliding-menu-handle {
     display: block;
     position: absolute;
     width: 100%;
-    height: $handle-width;
+    height: 4em;
     background: #2f2f2f;
     color: white;
     text-decoration: none;
-    text-align: center;
-  }
+    text-align: center; }
 
   .sliding-menu-container {
     position: fixed;
-    top: 0;
-    width: $menu-width;
-    height: 100%;
+    width: 100%;
     z-index: 9001;
-    background: gainsboro;
-  }
-}*/
+    background: gainsboro; } }
