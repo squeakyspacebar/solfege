@@ -303,6 +303,7 @@ function configurationHandleToggle() {
 }
 
 function updateHandles() {
+  console.log("Updated handles.");
   aboutHandleToggle();
   configurationHandleToggle();
 }
@@ -312,10 +313,10 @@ function init() {
   if(Modernizr.mq("only screen and (orientation: landscape)")) {
     $("#about-menu-toggle").on("change", function() {
       updateHandles();
-    }
+    });
     $("#configuration-menu-toggle").on("change", function() {
       updateHandles();
-    }
+    });
   } else if(Modernizr.mq("only screen and (orientation: portrait)")) {
     // Change the orientation of the handle arrows to vertical.
     $("#about-menu-handle i")
