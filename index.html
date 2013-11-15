@@ -39,12 +39,12 @@
             thought it would be a good opportunity to round out my skillset.</p><br />
             <p>Right now, it is still a work in progress.  I am currently planning on:</p><br />
             <ul>
-              <li>Fixing jQuery event handling on the radial menu for click events instead of hovering.</li>
-              <li>A game loop to continuously generate new scenarios ad infinitum without refreshing.</li>
+              <li><strike>Fixing jQuery event handling on the radial menu for click events instead of hovering.</strike></li>
+              <li><strike>A game loop to continuously generate new scenarios ad infinitum without refreshing.</strike></li>
               <li>Configurable solfege pronunciations.</li>
-              <li>Configurable octaves and keys.</li>
+              <li><strike>Configurable octaves and keys.</strike></li>
               <li>More bulletproof markup and styling.</li>
-              <li>Design support for different resolutions and devices, including phones and tablets.</li>
+              <li><strike>Design support for different resolutions and devices, including phones and tablets.</strike></li>
             </ul>
           </div>
         </div>
@@ -192,6 +192,10 @@
         <a href="#octaves">Octaves</a>
         <div class="sub-content">
           <div class="content">
+            <p><strong>Note</strong>: These values are based on scientific pitch notation and the
+              standard 88-key piano, and are not relative to the selected key.  The 0th octave notes
+              are currently removed due to faulty sound samples.  The single 8th octave note has been
+              removed for my own convenience.</p><br>
             <div id="octaves">
               <input type="checkbox" value="1" />1<br />
               <input type="checkbox" value="2" />2<br />
