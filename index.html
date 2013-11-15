@@ -9,11 +9,18 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/slide-menu.css" />
   <link rel="stylesheet" href="css/accordion-menu.css" />
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
 </head>
 <body>
   <!-- Sliding Menu Handles -->
-  <a id="about-menu-handle" class="sliding-menu-handle" href="#">&#8250;</a>
-  <a id="configuration-menu-handle" class="sliding-menu-handle" href="#">&#8249;</a>
+  <input type="checkbox" id="about-menu-toggle" class="menu-handle" />
+  <label for="about-menu-toggle" id="about-menu-handle" class="sliding-menu-handle">
+    <i class="fa fa-angle-double-right"></i>
+  </label>
+  <input type="checkbox" id="configuration-menu-toggle" class="menu-handle" />
+  <label for="configuration-menu-toggle" id="configuration-menu-handle" class="sliding-menu-handle">
+    <i class="fa fa-angle-double-left"></i>
+  </label>
   <!-- Sliding Menu Content -->
   <nav id="about-menu-container" class="sliding-menu-container">
     <ul id="about-menu" class="accordion">
@@ -208,32 +215,34 @@
     </ul>
   </nav>
   <!-- Training Interface -->
-  <audio id="voice" type="audio/ogg">Your browser does not support the audio element.</audio>
-  <div id="ring">
-    <a id="menu-button" tabindex="-1" href="#">&#9834;</a>
-    <ul id="menu">
-      <li class="item">
-        <a id="do" href="#" tabindex="-1">Do</a>
-      </li>
-      <li class="item">
-        <a id="re" href="#" tabindex="-1">Re</a>
-      </li>
-      <li class="item">
-        <a id="mi" href="#" tabindex="-1">Mi</a>
-      </li>
-      <li class="item">
-        <a id="fa" href="#" tabindex="-1">Fa</a>
-      </li>
-      <li class="item">
-        <a id="so" href="#" tabindex="-1">So</a>
-      </li>
-      <li class="item">
-        <a id="la" href="#" tabindex="-1">La</a>
-      </li>
-      <li class="item">
-        <a id="ti" href="#" tabindex="-1">Ti</a>
-      </li>
-    </ul>
+  <div>
+    <audio id="voice" type="audio/ogg">Your browser does not support the audio element.</audio>
+    <div id="ring">
+      <a id="menu-button" tabindex="-1" href="#"><i class="fa fa-play-circle"></i></a>
+      <ul id="menu">
+        <li class="item">
+          <a id="do" href="#" tabindex="-1">Do</a>
+        </li>
+        <li class="item">
+          <a id="re" href="#" tabindex="-1">Re</a>
+        </li>
+        <li class="item">
+          <a id="mi" href="#" tabindex="-1">Mi</a>
+        </li>
+        <li class="item">
+          <a id="fa" href="#" tabindex="-1">Fa</a>
+        </li>
+        <li class="item">
+          <a id="so" href="#" tabindex="-1">So</a>
+        </li>
+        <li class="item">
+          <a id="la" href="#" tabindex="-1">La</a>
+        </li>
+        <li class="item">
+          <a id="ti" href="#" tabindex="-1">Ti</a>
+        </li>
+      </ul>
+    </div>
   </div>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   <script src="js/script.js"></script>

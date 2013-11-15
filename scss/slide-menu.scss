@@ -2,34 +2,42 @@
   $menu-width: 30%;
   $handle-size: 3em;
   
+  #about-menu-toggle, #configuration-menu-toggle {
+    display: none;
+  }
+
   #about-menu-handle {
     left: 0;
-  
-    &.open {
-      left: $menu-width;
-    }
   }
   
   #configuration-menu-handle {
     right: 0;
-  
-    &.open {
-      right: $menu-width;
-    }
   }
   
   #about-menu-container {
     left: -$menu-width;
-  
-    &.open {
-      left: 0;
-    }
   }
 
   #configuration-menu-container {
     right: -$menu-width;
-  
-    &.open {
+  }
+
+  #about-menu-toggle:checked {
+    & ~ #about-menu-handle {
+      left: $menu-width;
+    }
+
+    & ~ #about-menu-container {
+      left: 0;
+    }
+  }
+
+  #configuration-menu-toggle:checked {
+    & ~ #configuration-menu-handle {
+      right: $menu-width;
+    }
+
+    & ~ #configuration-menu-container {
       right: 0;
     }
   }
@@ -43,6 +51,7 @@
     color: white;
     text-decoration: none;
     text-align: center;
+    cursor: pointer;
   }
 
   .sliding-menu-container {
@@ -57,45 +66,57 @@
 
 @media screen and (orientation: portrait) {
   $menu-width: 100%;
-  $handle-width: 4.0em;
+  $handle-size: 4em;
+
+  #about-menu-toggle, #configuration-menu-toggle {
+    display: none;
+    visibility: hidden;
+  }
 
   #about-menu-handle {
     top: 0;
-  
-    &.open {
-      bottom: 0;
-    }
   }
   
   #configuration-menu-handle {
     bottom: 0;
-  
-    &.open {
-      top: 0;
-    }
   }
   
   #about-menu-container {
     top: -$menu-width;
-  
-    &.open {
-      bottom: $handle-width;
-    }
   }
 
   #configuration-menu-container {
     bottom: -$menu-width;
-  
-    &.open {
-      top: $handle-width;
+  }
+
+  #about-menu-toggle:checked {
+    & ~ #about-menu-handle {
+      top: auto;
+      bottom: $handle-size;
+    }
+
+    & ~ #about-menu-container {
+      top: 0;
+      bottom: 8em;
+    }
+  }
+
+  #configuration-menu-toggle:checked {
+    & ~ #configuration-menu-handle {
+      top: $handle-size;
+      bottom: auto;
+    }
+
+    & ~ #configuration-menu-container {
+      top: 8em;
     }
   }
 
   .sliding-menu-handle {
     display: block;
     position: absolute;
-    width: 100%;
-    height: $handle-width;
+    width: $menu-width;
+    height: $handle-size;
     background: #2f2f2f;
     color: white;
     text-decoration: none;
@@ -104,9 +125,7 @@
 
   .sliding-menu-container {
     position: fixed;
-    top: 0;
     width: $menu-width;
-    height: 100%;
     z-index: 9001;
     background: gainsboro;
   }
