@@ -8,16 +8,16 @@ The principles driving the design of the tool are a minimalist visual aesthetic 
 
 ## Implementation
 
-Links to the following sources can be found in the site page itself under the *Credit* section.
+Links to the following sources can also be found in the site page itself under the *Credit* section.
 
 ### Techniques
 
-The CSS radial menu technique at the heart of the interface was taken from Ana Tudor through a StackOverflow.  The sliding menus are taken from Blueprints on Codrops, and the accordion menus are taken from Valeriu Timbuc at Designmodo.
+The CSS radial menu technique at the heart of the interface was taken from [Ana Tudor through a StackOverflow answer](http://dabblet.com/gist/3979221/cb69c5e8ccf0745fff2c94b47b27b108931f1a15).  The sliding menus are taken from [Blueprints on Codrops](http://tympanus.net/Blueprints/SlidePushMenus/), and the accordion menus are taken from [Valeriu Timbuc at Designmodo](http://designmodo.com/css3-accordion-menu/).
 
 ### Libraries
 
-The jQuery is primarily limited to managing the tone generation and unfortunately, the profile view behavior.  I used Modernizr to detect the orientation media query for profile views.  To reduce the amount of static image content that I would have to serve, manage, and design around, I used Font Awesome for my icons.
+The [jQuery](http://jquery.com/) is primarily limited to managing the tone generation and unfortunately, the profile view behavior.  I used [Modernizr](http://modernizr.com/) to detect the orientation media query for profile views.  To reduce the amount of static image content that I would have to serve, manage, and design around, I used [Font Awesome](http://fontawesome.io) for my icons.
 
 ### Audio
 
-The audio was obtained via the University of Iowa Electronic Music Studios website.
+The audio was obtained via [the University of Iowa Electronic Music Studios website](http://theremin.music.uiowa.edu/index.html).
