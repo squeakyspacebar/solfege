@@ -6,6 +6,10 @@ The title pretty much strikes at the heart of the project's practical purpose.  
 
 The principles driving the design of the tool are a minimalist visual aesthetic as well as a minimal JavaScript requirement which was admittedly quite artificial - I wanted to try to push the envelope in terms of implementing behavioral aspects with CSS.  Although I would argue largely in favor of the increasingly creaky standard model for the separation of concerns between HTML, CSS, and JavaScript, this was an experimental project.
 
+## Getting Started
+
+All you need are Node.js/npm and Grunt. Simply run `npm install` in the repository's root directory, wait for the packages to finish installing, and then run `grunt` to build. The finished build should appear under the `dist` directory.  Once the 
+
 ## Implementation
 
 Links to the following sources can also be found in the site page itself under the *Credit* section.
