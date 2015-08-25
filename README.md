@@ -8,7 +8,7 @@ The principles driving the design of the tool are a minimalist visual aesthetic 
 
 ## Getting Started
 
-All you need are Node.js/npm and Grunt. Simply run `npm install` in the repository's root directory, wait for the packages to finish installing, and then run `grunt` to build. The finished build should appear under the `dist` directory.  Once the 
+Requires [Compass](http://compass-style.org/install), [Sass](http://sass-lang.com/install), and [Node.js/npm](https://docs.npmjs.com/getting-started/installing-node). Simply run `npm install` in the repository's root directory, wait for the packages to finish installing, and then run `grunt` to build. The finished build should appear under the `dist` directory. Once the build is finished, you should be able to simply open `/dist/index.html` in your browser.
 
 ## Implementation
 
